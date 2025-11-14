@@ -9,12 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
     
-
-    const autoPlaySpeed = 0.5; 
+    const autoPlaySpeed = 0.5;
 
     const slidesPerView = 5; 
     const originalSlideCount = sliderItems.length;
-
 
     const clonesEnd = [];
     for (let i = 0; i < slidesPerView; i++) {
@@ -25,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const clonesStart = [];
     for (let i = originalSlideCount - slidesPerView; i < originalSlideCount; i++) {
+
          if(sliderItems[i]) {
             const clone = sliderItems[i].cloneNode(true);
             clone.classList.add('slide-clone');
@@ -47,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTranslate = -initialOffset; 
     let prevTranslate = -initialOffset; 
     let animationID = 0;
+
 
     let velocity = 0;   
     let lastPos = 0;       
@@ -71,9 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lastTime = Date.now();
         velocity = 0; 
         
-
         cancelAnimationFrame(animationID);
-
 
         prevTranslate = currentTranslate;
         
@@ -112,13 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         prevTranslate = currentTranslate; 
         
-
         animationID = requestAnimationFrame(momentumLoop);
-
     }
-
+    
     function autoPlayLoop() {
-
         if (isDragging) return; 
 
         currentTranslate -= autoPlaySpeed;
@@ -126,13 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
         checkInfiniteLoop(); 
         setSliderPosition(); 
         
-
         animationID = requestAnimationFrame(autoPlayLoop);
     }
 
 
     function momentumLoop() {
-
         if (isDragging) {
             cancelAnimationFrame(animationID);
             return;
@@ -141,13 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (Math.abs(velocity) < 0.05) {
             velocity = 0;
             cancelAnimationFrame(animationID);
-
+            
             animationID = requestAnimationFrame(autoPlayLoop);
             return;
         }
 
         currentTranslate += velocity * 16.6;
-        velocity *= 0.95; // 서서히 감속
+        velocity *= 0.95; 
 
         checkInfiniteLoop(); 
         setSliderPosition();
@@ -175,4 +168,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const thresholdStart = -initialOffset;
         if (currentTranslate > thresholdStart) {
             currentTranslate -= realSlidesWidth;
-            prevTranslate -= realSlidesWidth
+            prevTranslate -= realSlidesWidth;
+            setSliderPosition();
+        }
+    }
+
+    sliderTrack.querySelectorAll('img').forEach(img => {
+        img.addEventListener('dragstart', (e) => e.preventDefault());
+    });
+    
+    
+    animationID = requestAnimationFrame(autoPlayLoop);
+
+});
