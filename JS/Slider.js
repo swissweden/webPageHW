@@ -8,10 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn("Draggable slider elements not found.");
         return;
     }
+    
 
-    // --- 무한 순환을 위한 설정 ---
+    const autoPlaySpeed = 0.5; 
+
     const slidesPerView = 5; 
     const originalSlideCount = sliderItems.length;
+
 
     const clonesEnd = [];
     for (let i = 0; i < slidesPerView; i++) {
@@ -22,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const clonesStart = [];
     for (let i = originalSlideCount - slidesPerView; i < originalSlideCount; i++) {
-
          if(sliderItems[i]) {
             const clone = sliderItems[i].cloneNode(true);
             clone.classList.add('slide-clone');
@@ -36,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemWidth = sliderItems[0].getBoundingClientRect().width;
     const realSlidesWidth = originalSlideCount * itemWidth; 
 
-    // 초기 위치 설정
     let initialOffset = clonesStart.length * itemWidth;
     sliderTrack.style.transform = `translateX(-${initialOffset}px)`;
     sliderTrack.style.transition = 'none'; 
@@ -46,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTranslate = -initialOffset; 
     let prevTranslate = -initialOffset; 
     let animationID = 0;
-
 
     let velocity = 0;   
     let lastPos = 0;       
@@ -67,13 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
         isDragging = true;
         startPos = getPositionX(e);
         
-
         lastPos = startPos;
         lastTime = Date.now();
         velocity = 0; 
         
 
         cancelAnimationFrame(animationID);
+
 
         prevTranslate = currentTranslate;
         
@@ -86,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const currentPosition = getPositionX(e);
         
-
         const now = Date.now();
         const dt = now - lastTime;
         const dx = currentPosition - lastPos;
@@ -97,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         lastPos = currentPosition;
         lastTime = now;
-
 
         const moveX = currentPosition - startPos;
         currentTranslate = prevTranslate + moveX;
@@ -112,35 +110,53 @@ document.addEventListener('DOMContentLoaded', () => {
         isDragging = false;
         sliderContainer.classList.remove('grabbing');
         
-
         prevTranslate = currentTranslate; 
+        
+
         animationID = requestAnimationFrame(momentumLoop);
+
     }
+
+    function autoPlayLoop() {
+
+        if (isDragging) return; 
+
+        currentTranslate -= autoPlaySpeed;
+        
+        checkInfiniteLoop(); 
+        setSliderPosition(); 
+        
+
+        animationID = requestAnimationFrame(autoPlayLoop);
+    }
+
 
     function momentumLoop() {
 
-        if (Math.abs(velocity) < 0.05) {
-            velocity = 0;
+        if (isDragging) {
             cancelAnimationFrame(animationID);
             return;
         }
 
-        currentTranslate += velocity * 16.6;
-        
+        if (Math.abs(velocity) < 0.05) {
+            velocity = 0;
+            cancelAnimationFrame(animationID);
 
-        velocity *= 0.95; 
+            animationID = requestAnimationFrame(autoPlayLoop);
+            return;
+        }
+
+        currentTranslate += velocity * 16.6;
+        velocity *= 0.95; // 서서히 감속
 
         checkInfiniteLoop(); 
-
         setSliderPosition();
         
-
         animationID = requestAnimationFrame(momentumLoop);
     }
 
 
     function getPositionX(e) {
-
         return e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
     }
 
@@ -149,31 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkInfiniteLoop() {
-
         const thresholdEnd = -(realSlidesWidth + initialOffset);
-
         if (currentTranslate < thresholdEnd) {
             currentTranslate += realSlidesWidth;
             prevTranslate += realSlidesWidth; 
             setSliderPosition();
         }
 
-
         const thresholdStart = -initialOffset;
-
         if (currentTranslate > thresholdStart) {
-
             currentTranslate -= realSlidesWidth;
-            prevTranslate -= realSlidesWidth; 
-            setSliderPosition();
-        }
-
-
-    }
-
-    // --- 이미지 드래그 방지 ---
-    sliderTrack.querySelectorAll('img').forEach(img => {
-        img.addEventListener('dragstart', (e) => e.preventDefault());
-    });
-
-});
+            prevTranslate -= realSlidesWidth
