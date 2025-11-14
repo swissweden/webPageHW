@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (revealElements.length === 0) return;
 
     revealElements.forEach(element => {
-        // 1. (수정됨) setupElement 함수를 수정된 버전으로 호출합니다.
         setupElement(element);
     });
 
