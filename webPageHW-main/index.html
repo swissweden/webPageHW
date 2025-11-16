@@ -1,0 +1,96 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+
+    <!-- <div data-include-path="header.html" class="header-container"></div>  -->
+    <div id="header"></div>
+
+    <main class="main-content">
+        <h1 class="text-center">Main Content Area</h1>
+        <h3 class="text-center">
+            This is the placeholder content for the index.html file.<br>
+            The header and footer are loaded dynamically using JavaScript.
+        </h3>
+
+        <section class="content-section"> <!-- 텍스트 효과 차라랑 -->
+            <p data-reveal class="text-center">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies quam ut diam dictum tincidunt.
+                Phasellus lacinia, lorem sit amet consectetur ornare, eros turpis interdum lacus,
+                nec accumsan diam ligula at sem. Praesent semper efficitur purus. Nulla iaculis imperdiet eros.
+                Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
+                sed varius orci. Curabitur porta posuere urna, non pellentesque massa vestibulum vitae,
+                erat nec fringilla eleifend, enim turpis ornare magna, vel commodo sem turpis at dolor.
+
+            </p>
+
+            <div class="draggable-slider-container">
+                <div class="slider-track">
+                    <div class="slide-item"><img src="https://picsum.photos/id/111/400/300" alt="Imgae 1"></div>
+                    <div class="slide-item"><img src="https://picsum.photos/id/122/400/300" alt="Image 2"></div>
+                    <div class="slide-item"><img src="https://picsum.photos/id/133/400/300" alt="Image 3"></div>
+                    <div class="slide-item"><img src="https://picsum.photos/id/144/400/300" alt="Image 4"></div>
+                    <div class="slide-item"><img src="https://picsum.photos/id/155/400/300" alt="Image 5"></div>
+                    <div class="slide-item"><img src="https://picsum.photos/id/166/400/300" alt="Image 6"></div>
+                    <div class="slide-item"><img src="https://picsum.photos/id/177/400/300" alt="Image 7"></div>
+                    <div class="slide-item"><img src="https://picsum.photos/id/188/400/300" alt="Image 8"></div>
+                </div>
+            </div>
+
+            <!-- <div class="spacer-md"> </div> 공백 만드는 클래스인데 프리뷰에선 작동하는데 웹에서 작동이 안되서 확인 필요 -->
+
+            <br><br><br><br><br> <!-- 땜빵용 공백 -->
+            <br><br><br><br><br>
+            <br><br><br><br><br>
+            <br><br><br><br><br>
+            <br><br><br><br><br>
+            <br><br><br><br><br>
+            <br><br><br><br><br>
+            
+
+            <p data-reveal class="text-center"><br>
+                <b>내리면 나오는 텍스트</b><br>
+                Proin non urna sagittis, molestie tellus a, volutpat quam.
+                Maecenas nibh magna, pellentesque et purus ut, venenatis molestie enim.
+                Duis mattis metus at dapibus varius. Cras eu dui lorem. Pellentesque eu eleifend dolor,
+                a eleifend ipsum. Quisque mollis nisl ac risus cursus auctor. Phasellus eget ligula rhoncus,
+                placerat erat sit amet, dignissim nunc. Vestibulum vitae commodo eros, at bibendum dolor.
+                Sed tempor ultricies eros, vitae cursus erat malesuada vel.
+                Aliquam vitae laoreet tortor, quis dignissim augue.
+
+            </p>
+        </section>
+
+        <div class="logo-loop-container">
+            <div class="logo-loop-track" data-logo-track> <!-- 여기에 로고나 이미지 따로 추가 -->
+                <div class="logo-loop-item">JavaScript</div>
+                <div class="logo-loop-item">CSS</div>
+                <div class="logo-loop-item">HTML</div>
+                <div class="logo-loop-item">React</div>
+                <div class="logo-loop-item">Vue</div>
+                <div class="logo-loop-item">Svelte</div>
+                <div class="logo-loop-item">Node.js</div>
+                <div class="logo-loop-item">Python</div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- <div data-include-path="footer.html"></div> -->
+
+    <div id="footer"></div>
+    <script src="JS/Script.js"></script>
+    <script src="JS/Slider.js"></script>
+    <script src="JS/ScrollReveal.js" defer></script>
+    <script src="JS/LogoLoop.js"></script>
+    <script src="JS/header.js"></script>
+    <script src="JS/footer.js"></script>
+</body>
+
+</html>
