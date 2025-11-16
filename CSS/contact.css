@@ -1,0 +1,85 @@
+/* CSS/contact.css */
+
+.contact-page .container {
+    max-width: 700px;
+    /* About 페이지(900px)보다 좁게 설정 */
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* 1. 소개 섹션 */
+.contact-intro {
+    text-align: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 3rem;
+}
+
+.contact-intro h1 {
+    margin-bottom: 1rem;
+}
+
+.contact-intro p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* 2. 연락처 폼 래퍼 */
+.contact-form-wrapper {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    /* 모바일 패딩 고려 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 폼 그룹 (라벨 + 인풋) */
+.contact-form-wrapper .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.contact-form-wrapper label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+/* 'login.css'에 정의된 .form-input 스타일을 
+  재사용하지만, 여기에도 기본 스타일을 정의해둡니다.
+*/
+.contact-form-wrapper .form-input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* 패딩이 너비에 포함되도록 */
+    font-family: inherit;
+    /* 폰트 상속 */
+}
+
+.contact-form-wrapper textarea.form-input {
+    resize: vertical;
+    /* 세로 크기만 조절 */
+    min-height: 120px;
+}
+
+/* 'login.css'에 정의된 .form-button 스타일을 재사용합니다. 
+  여기서는 너비만 100%로 설정합니다.
+*/
+.contact-form-wrapper .form-button {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.85rem;
+}
+
+/* 모바일 화면 대응 */
+@media (max-width: 768px) {
+    .contact-form-wrapper {
+        padding: 1.5rem 1rem;
+    }
+}

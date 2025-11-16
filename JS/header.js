@@ -8,9 +8,9 @@ const headerHTML = `
 <nav id="main-menu" class="main-menu">
     <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="test.html">About</a></li>
         <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="contact.html">Contact</a></li>
         <li><a href="login.html">Login</a></li>
     </ul>
 </nav>
