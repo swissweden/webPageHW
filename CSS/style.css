@@ -1,6 +1,13 @@
 /* CSS/style.css */
 
-:root {
+@font-face { /* 기본 글씨체 눈누에서 가져옴 */
+    font-family: 'JoseonGulim'; 
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGu.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+:root {     
 
     --main-color: #F9E79F;
 
@@ -22,7 +29,7 @@
 }
 
 body {
-    font-family: "Pretendard", "Malgun Gothic", sans-serif;
+    font-family: 'JoseonGulim', sans-serif !important; 
     line-height: 1.6;
     background-color: var(--bg-color);
     color: var(--text-color);
