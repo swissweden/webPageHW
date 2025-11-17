@@ -1,13 +1,14 @@
 /* CSS/style.css */
 
-@font-face { /* 기본 글씨체 눈누에서 가져옴 */
-    font-family: 'JoseonGulim'; 
+@font-face {
+    /* 기본 글씨체 눈누에서 가져옴 */
+    font-family: 'JoseonGulim';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGu.woff') format('woff');
     font-weight: normal;
     font-display: swap;
 }
 
-:root {     
+:root {
 
     --main-color: #F9E79F;
 
@@ -29,7 +30,7 @@
 }
 
 body {
-    font-family: 'JoseonGulim', sans-serif !important; 
+    font-family: 'JoseonGulim', sans-serif !important;
     line-height: 1.6;
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -58,6 +59,14 @@ body {
     padding: 4px 12px;
     margin-right: 1rem;
     border-radius: 4px;
+    transition: all 0.3s ease;
+
+}
+
+#menu-toggle-btn:hover {
+    background-color: var(--header-text);
+    color: var(--main-color);
+    border-color: var(--header-text);
 }
 
 .site-title {
