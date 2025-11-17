@@ -10,7 +10,8 @@
 .about-intro {
     text-align: center;
     padding: 2rem 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #d4d3d3;
+    margin-bottom: 3rem;
 }
 
 .about-intro h1 {

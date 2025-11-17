@@ -106,6 +106,14 @@ body {
     padding: 6rem 1rem 4rem 1rem;
 }
 
+.line {
+    text-align: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 3rem;
+}
+
+
 .hero-text {
 
     background-color: rgba(255, 255, 255, 0.5);
