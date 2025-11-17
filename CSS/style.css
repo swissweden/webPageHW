@@ -396,3 +396,33 @@ body {
 .user-icon:hover {
     color: #8D6E63;
 }
+
+
+.site-footer {
+    padding: 3rem 0;
+    margin-top: auto;
+    background-color: var(--menu-bg);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    .social-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .social-links a {
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+        color: #fff;
+        transform: translateY(-3px);
+    }
+}
