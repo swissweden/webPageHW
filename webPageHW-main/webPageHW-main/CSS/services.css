@@ -1,0 +1,141 @@
+/* CSS/services.css */
+
+@font-face { /* 기본 글씨체 눈누에서 가져옴 */
+    font-family: 'JoseonGulim';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGu.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: 'JoseonGulim', sans-serif !important; 
+}
+
+.services-page .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+
+.services-intro {
+    text-align: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid #d4d3d3;
+    margin-bottom: 3rem;
+}
+
+.services-intro h1 {
+    margin-bottom: 1rem;
+}
+
+.services-intro p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+.pricing-table-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+
+.plan-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 340px;
+
+
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+
+.plan-card.recommended {
+    border: 2px solid #007bff;
+    position: relative;
+}
+
+.plan-card.recommended::before {
+    content: 'Best Value';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #007bff;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 15px;
+}
+
+.plan-header {
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 1rem;
+}
+
+.plan-header h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.plan-price {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.plan-price span {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #777;
+}
+
+.plan-features {
+    list-style-type: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    flex-grow: 1;
+}
+
+.plan-features li {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.plan-features li strong {
+    color: #333;
+}
+
+
+.plan-card .form-button {
+    width: 100%;
+    padding: 0.85rem;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+
+}
