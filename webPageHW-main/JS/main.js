@@ -35,7 +35,7 @@ function loadMemos() {
             if (memo.image) {
                 const img = document.createElement('img');
                 img.src = memo.image;
-                img.style.cssText = 'width: 100%; max-height: 200px; object-fit: cover;';
+                img.style.cssText = 'width: 5em; max-height: 5em; object-fit: cover;';
                 card.appendChild(img);
             }
 

@@ -25,7 +25,7 @@ function setupMemoDemo() {
         if (imageUrl) {
             const newImage = document.createElement('img');
             newImage.src = imageUrl;
-            newImage.style.cssText = 'width: 100%; max-height: 200px; object-fit: cover; margin-bottom: 10px; border-radius: 4px;';
+            newImage.style.cssText = 'width: 5em; max-height: 5em; object-fit: cover;';
             newCard.appendChild(newImage);
             
         }
@@ -173,7 +173,7 @@ function setupTodoDemo() {
 
         createTodoLi(text, false); 
         todoInput.value = '';
-        saveTodosToStorage(); // <-- 함수 이름 변경
+        saveTodosToStorage(); 
     }
     todoAddButton.addEventListener('click', addTodoItem);
 
@@ -183,16 +183,16 @@ function setupTodoDemo() {
         }
     });
 
-    // [수정] saveTodosToCookie -> saveTodosToStorage 호출
+    
     todoList.addEventListener('change', (e) => {
         if (e.target.tagName === 'INPUT' && e.target.type === 'checkbox') {
             const li = e.target.closest('li'); 
             li.classList.toggle('completed', e.target.checked);
-            saveTodosToStorage(); // <-- 함수 이름 변경
+            saveTodosToStorage(); 
         }
     });
 
-    // (LI 클릭 이벤트는 변경 없음, 'change' 이벤트를 발생시키므로 자동 저장됨)
+    
     todoList.addEventListener('click', (e) => {
         if (e.target.tagName === 'LI') {
             const checkbox = e.target.querySelector('input[type="checkbox"]');
