@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My MemoPad</title>
+    <style>
+        /* 색상 변수 정의 */
+        :root {
+            --main-color: #F9E79F;
+            --bg-color: #FEF9E7;
+            --text-color: #5D4037;
+            --header-text: #5D4037;
+            --menu-bg: #5D4037;
+            --accent-color: #F39C12;
+            --white: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 헤더 영역 */
+        header {
+            background-color: var(--main-color);
+            color: var(--header-text);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px var(--shadow);
+            z-index: 10;
+            position: relative;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-right: 20px;
+            padding: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .menu-bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--header-text);
+            border-radius: 3px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* 사이드바 메뉴 */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px; /* 숨김 상태 */
+            width: 250px;
+            height: 100%;
+            background-color: var(--menu-bg);
+            color: var(--main-color);
+            transition: left 0.3s ease-in-out;
+            padding-top: 70px;
+            z-index: 5;
+            box-shadow: 2px 0 5px var(--shadow);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(249, 231, 159, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar li:hover {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+
+        /* 메인 콘텐츠 */
+        main {
+            flex: 1;
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* 메모 입력 영역 */
+        .input-area {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 2px solid var(--main-color);
+            border-radius: 5px;
+            resize: none;
+            font-size: 1rem;
+            outline: none;
+            color: var(--text-color);
+        }
+
+        textarea:focus {
+            border-color: var(--accent-color);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .save-btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            align-self: flex-end;
+        }
+
+        .save-btn:hover {
+            background-color: #d68910;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        /* 메모 리스트 영역 */
+        .memo-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .memo-card {
+            background-color: var(--main-color);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 150px;
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .memo-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .memo-content {
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.4;
+        }
+
+        .memo-date {
+            font-size: 0.8rem;
+            color: #795548;
+            margin-bottom: 10px;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 5px;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .delete-btn:hover { background-color: #c0392b; }
+
+        .share-btn {
+            background-color: var(--menu-bg);
+            color: var(--main-color);
+        }
+        .share-btn:hover { background-color: #3e2723; }
+
+        /* 알림 메시지 (Toast) */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--menu-bg);
+            color: var(--main-color);
+            padding: 10px 20px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 100;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 오버레이 (메뉴 열렸을 때 배경 흐리게) */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 4;
+            display: none;
+        }
+        .overlay.active { display: block; }
+
+    </style>
+</head>
+<body>
+
+    <!-- 오버레이 -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- 헤더 -->
+    <header>
+        <button class="menu-btn" id="menuToggle">
+            <div class="menu-bar"></div>
+            <div class="menu-bar"></div>
+            <div class="menu-bar"></div>
+        </button>
+        <h1>MemoPad</h1>
+    </header>
+
+    <!-- 사이드바 메뉴 -->
+    <nav class="sidebar" id="sidebar">
+        <ul>
+            <li onclick="alert('새 메모 작성을 위해 입력창을 이용해주세요.')">새 메모 작성</li>
+            <li onclick="clearAllMemos()">전체 메모 삭제</li>
+            <li onclick="alert('만든이: 메모패드 도우미')">정보</li>
+        </ul>
+    </nav>
+
+    <!-- 메인 콘텐츠 -->
+    <main>
+        <!-- 입력 영역 -->
+        <div class="input-area">
+            <textarea id="memoInput" placeholder="여기에 메모를 입력하세요..."></textarea>
+            <button class="btn save-btn" onclick="addMemo()">저장하기</button>
+        </div>
+
+        <!-- 메모 리스트 -->
+        <div class="memo-list" id="memoList">
+            <!-- 메모가 여기에 추가됩니다 -->
+        </div>
+    </main>
+
+    <!-- 토스트 알림 -->
+    <div class="toast" id="toast">링크가 복사되었습니다!</div>
+
+    <script>
+        // 요소 선택
+        const memoInput = document.getElementById('memoInput');
+        const memoList = document.getElementById('memoList');
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const toast = document.getElementById('toast');
+
+        // 로컬 스토리지 키
+        const STORAGE_KEY = 'my_memos';
+
+        // 초기 실행
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMemos();
+            checkSharedUrl();
+        });
+
+        // 메뉴 토글 기능
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // 메모 저장하기
+        function addMemo() {
+            const text = memoInput.value.trim();
+            if (text === '') {
+                alert('내용을 입력해주세요!');
+                return;
+            }
+
+            const memo = {
+                id: Date.now(),
+                content: text,
+                date: new Date().toLocaleString()
+            };
+
+            const memos = getMemosFromStorage();
+            memos.push(memo);
+            saveMemosToStorage(memos);
+            
+            renderMemo(memo);
+            memoInput.value = ''; // 입력창 초기화
+        }
+
+        // 화면에 메모 그리기
+        function renderMemo(memo) {
+            const card = document.createElement('div');
+            card.className = 'memo-card';
+            card.setAttribute('data-id', memo.id);
+
+            card.innerHTML = `
+                <div class="memo-date">${memo.date}</div>
+                <div class="memo-content">${memo.content}</div>
+                <div class="card-actions">
+                    <button class="action-btn share-btn" onclick="shareMemo('${encodeURIComponent(memo.content)}')">공유</button>
+                    <button class="action-btn delete-btn" onclick="deleteMemo(${memo.id})">삭제</button>
+                </div>
+            `;
+            
+            // 최신 메모가 위로 오게 하려면 prepend, 아래로 가려면 append
+            memoList.prepend(card); 
+        }
+
+        // 메모 삭제하기
+        function deleteMemo(id) {
+            if(confirm('정말 삭제하시겠습니까?')) {
+                let memos = getMemosFromStorage();
+                memos = memos.filter(memo => memo.id !== id);
+                saveMemosToStorage(memos);
+                
+                // 화면 갱신
+                const card = document.querySelector(`.memo-card[data-id="${id}"]`);
+                if(card) card.remove();
+            }
+        }
+
+        // 전체 삭제
+        function clearAllMemos() {
+            if(confirm('모든 메모를 삭제하시겠습니까? 복구할 수 없습니다.')) {
+                localStorage.removeItem(STORAGE_KEY);
+                memoList.innerHTML = '';
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        }
+
+        // 메모 공유하기 (URL 생성 및 복사)
+        function shareMemo(encodedContent) {
+            // 현재 URL에 ?note=내용 형식을 붙여서 링크 생성
+            const baseUrl = window.location.origin + window.location.pathname;
+            const shareUrl = `${baseUrl}?note=${encodedContent}`;
+
+            // 클립보드에 복사
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                showToast('공유 링크가 복사되었습니다!');
+            }).catch(err => {
+                console.error('복사 실패:', err);
+                alert('링크 복사에 실패했습니다.');
+            });
+        }
+
+        // 공유된 URL인지 확인
+        function checkSharedUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sharedNote = urlParams.get('note');
+
+            if (sharedNote) {
+                // 공유된 내용이 있다면 입력창에 채워넣기
+                memoInput.value = decodeURIComponent(sharedNote);
+                alert('공유된 메모를 불러왔습니다. 저장 버튼을 눌러 내 리스트에 추가하세요.');
+                
+                // URL 파라미터 청소 (깔끔하게 보이도록)
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        }
+
+        // 로컬 스토리지에서 가져오기
+        function getMemosFromStorage() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        // 로컬 스토리지에 저장하기
+        function saveMemosToStorage(memos) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(memos));
+        }
+
+        // 초기 로딩 시 리스트 렌더링
+        function loadMemos() {
+            const memos = getMemosFromStorage();
+            memoList.innerHTML = ''; // 초기화
+            memos.forEach(memo => renderMemo(memo));
+        }
+
+        // 토스트 메시지 보여주기
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

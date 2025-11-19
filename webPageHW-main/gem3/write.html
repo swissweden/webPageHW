@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemoPad - 작성</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+
+    <header>
+        <button class="menu-btn" id="menuToggle">
+            <div class="menu-bar"></div>
+            <div class="menu-bar"></div>
+            <div class="menu-bar"></div>
+        </button>
+        <h1>MemoPad Write</h1>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <ul>
+            <li onclick="location.href='index.html'">목록으로 돌아가기</li>
+            <li onclick="alert('작성 중인 내용은 저장되지 않습니다.')">홈으로</li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="input-container">
+            <h2>새 메모 작성</h2>
+            
+            <!-- 텍스트 입력 -->
+            <textarea id="memoInput" placeholder="여기에 내용을 입력하세요..."></textarea>
+            
+            <!-- 이미지 업로드 -->
+            <div class="file-upload-wrapper">
+                <label for="imageInput" class="file-label">📷 사진 추가하기</label>
+                <input type="file" id="imageInput" accept="image/*">
+                
+                <!-- 미리보기 영역 -->
+                <div id="previewArea" class="preview-area">
+                    <span class="preview-placeholder">이미지가 없습니다</span>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                <button class="btn" style="background: #ddd;" onclick="location.href='index.html'">취소</button>
+                <button class="btn save-btn" onclick="saveMemo()">저장하기</button>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast" id="toast"></div>
+    <script src="script.js"></script>
+</body>
+</html>
