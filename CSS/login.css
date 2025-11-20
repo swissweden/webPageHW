@@ -1,31 +1,33 @@
-@font-face { /* 기본 글씨체 눈누에서 가져옴 */
-    font-family: 'JoseonGulim'; 
+@font-face {
+    /* 기본 글씨체 눈누에서 가져옴 */
+    font-family: 'JoseonGulim';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGu.woff') format('woff');
     font-weight: normal;
     font-display: swap;
 }
 
 body {
-    font-family: 'JoseonGulim', sans-serif !important; 
+    font-family: 'JoseonGulim', sans-serif !important;
 }
 
 .login-container {
-  text-align: center;
+    text-align: center;
 }
 
 .form-signin {
-  max-width: 400px; 
-  margin: 0 auto;   
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .form-signin .form-floating label {
-  text-align: left;
+    text-align: left;
 }
 
 .form-signin .btn-success {
-   width: 100%;
+    width: 100%;
 }
-.btn a{
+
+.btn a {
     text-decoration: none;
     color: black;
 }
@@ -34,9 +36,9 @@ body {
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     margin: 0;
     padding: 0;
-    
-    background-color: #FEF9E7; 
-    
+
+    background-color: #FEF9E7;
+
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -49,8 +51,8 @@ body {
 }
 
 .login-page-header {
-    padding: 2rem 1.5rem; 
-    margin-bottom: 1rem; 
+    padding: 2rem 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .login-page-header h1 {
@@ -69,16 +71,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    flex-grow: 1; 
-    
+
+    flex-grow: 1;
+
     padding: 1rem;
 }
 
 .login-container {
     width: 100%;
-    max-width: 450px; 
-    padding: 2.5rem; 
+    max-width: 450px;
+    padding: 2.5rem;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -102,7 +104,7 @@ body {
     font-size: 1rem;
     border: 1px solid #ced4da;
     border-radius: 0.375rem;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .form-input::placeholder {
@@ -111,11 +113,11 @@ body {
 
 .form-button {
     width: 100%;
-    padding: 0.75rem 1.25rem; 
-    font-size: 1.1rem; 
+    padding: 0.75rem 1.25rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #fff;
-    background-color: #198754; 
+    background-color: #198754;
     border: none;
     border-radius: 0.375rem;
     cursor: pointer;
@@ -131,10 +133,31 @@ body {
     display: block;
     margin-top: 1.25rem;
     font-size: 0.9rem;
-    color: #0d6efd; 
+    color: #0d6efd;
     text-decoration: none;
 }
 
 .register-link:hover {
     text-decoration: underline;
+}
+
+.google-login-button {
+    background-color: #4285F4;
+    /* Google Blue */
+    color: white;
+    margin-top: 10px;
+    /* 기존 버튼과의 간격 */
+    display: flex;
+    /* 로고와 텍스트를 나란히 */
+    justify-content: center;
+    align-items: center;
+}
+
+.google-login-button:hover {
+    background-color: #357ae8;
+}
+
+/* 로고를 위한 추가 스타일 (font-family가 깨질 경우를 대비해 직접 이미지 사용) */
+.google-login-button img {
+    margin-right: 10px;
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,13 @@
     <title>로그인 페이지</title>
 
     <link rel="stylesheet" href="CSS/login.css">
-    <link rel="stylesheet" href="CSS/style.css"> 
-    
+    <link rel="stylesheet" href="CSS/style.css">
+
 </head>
-<body class="login-page"> <div id="header"></div>
-    
+
+<body class="login-page">
+    <div id="header"></div>
+
     <div class="login-page-header">
         <div class="container">
             <h1>로그인</h1>
@@ -22,28 +25,87 @@
     <div class="login-form-wrapper">
         <div class="login-container">
             <h3>Please sign in</h3>
-            
+
             <form action="index.html" method="post">
-                
+
                 <div class="form-group">
-                    <input type="text" class="form-input" id="floatingId" name='j_username'
-                     required autofocus placeholder="ID">
+                    <input type="text" class="form-input" id="floatingId" name='j_username' required autofocus
+                        placeholder="ID">
                 </div>
-                
+
                 <div class="form-group">
-                    <input type="password" class="form-input" id="floatingPassword" name='j_password' placeholder="Password">
+                    <input type="password" class="form-input" id="floatingPassword" name='j_password'
+                        placeholder="Password">
                 </div>
 
                 <button class="form-button" onclick="alert('데모입니다!')">로그인</button>
-                
-                <a href="#" class="register-link" onclick="alert('데모입니다!')"    >회원가입</a>
+
+                <a href="#" class="register-link" onclick="alert('데모입니다!')">회원가입</a>
             </form>
+            <button class="form-button google-login-button" id="google-login-btn">
+                <i class="material-icons" style="margin-right: 8px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo-google-chrome-icon.svg"
+                        alt="Google Logo" style="width: 20px; height: 20px; vertical-align: middle;">
+                </i>
+                Google 계정으로 로그인
+            </button>
+
         </div>
     </div>
 
     <div id="footer"></div>
 
     <script src="JS/Script.js"></script>
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA...",
+            authDomain: "memoweb-e3049.firebaseapp.com",
+            projectId: "memoweb-e3049",
+            storageBucket: "...",
+            messagingSenderId: "...",
+            appId: "..."
+        };
+
+        // Firebase 초기화
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // 1. 구글 로그인 버튼 요소 가져오기
+        const googleLoginButton = document.getElementById('google-login-btn');
+
+        // 2. 버튼에 클릭 이벤트 리스너 추가
+        if (googleLoginButton) {
+            googleLoginButton.addEventListener('click', async (event) => {
+                event.preventDefault();
+
+                try {
+                    // 구글 로그인 팝업 실행
+                    const result = await signInWithPopup(auth, provider);
+
+                    // 로그인 성공 후
+                    const user = result.user;
+                    console.log("로그인 성공! 환영합니다:", user.displayName);
+
+                    // TODO: 로그인 성공 후 메인 페이지로 이동 (index.html)
+                    alert(`${user.displayName}님 환영합니다!`);
+                    window.location.href = "index.html";
+
+                } catch (error) {
+                    console.error("로그인 중 오류 발생:", error);
+                    alert("로그인에 실패했습니다: " + error.code);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
 
 </body>
+
 </html>
